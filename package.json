@@ -4,12 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node_modules/.bin/nyc node_modules/.bin/serial-mocha test/* --sort | tee test-output.txt && ./node_modules/.bin/nyc report --reporter=clover && ! grep -q -oP \"\\d+\\sfailing\" test-output.txt && rm test-output.txt || { echo \"Test output is located in 'test-output.txt'\" ; exit 1 ; }"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/finwo/node-expressish"
   },
   "author": "Robin Bron <robin@finwo.nl>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "clover": "0.0.1",
+    "co": "^4.6.0",
+    "fs-extra": "^5.0.0",
+    "jshint": "^2.9.5",
+    "nyc": "^11.4.1",
+    "serial-mocha": "0.0.4"
+  }
 }
