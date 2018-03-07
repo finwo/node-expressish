@@ -60,7 +60,9 @@ function App() {
             allowedMethods = allowedMethods.filter(function(item,pos) {
               return allowedMethods.indexOf(item) === pos;
             });
-            res.setHeader('Access-Control-Allow-Method', allowedMethods);
+            res.setHeader('Access-Control-Allow-Headers', '*');
+            res.setHeader('Access-Control-Allow-Origin' , '*');
+            res.setHeader('Access-Control-Allow-Method' , allowedMethods);
             res.end();
           }
           return;
