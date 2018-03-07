@@ -40,6 +40,17 @@ function App() {
       } else {
         req.body = new Buffer('');
       }
+      var bodyParams;
+      try {
+        bodyParams = JSON.parse(req.body.toString());
+      } catch(e) {
+        try {
+          bodyParams = decodeQuery(req.body.toString());
+        } catch(e) {
+          bodyParams = {};
+        }
+      }
+      Object.assign(params,bodyParams);
       (function next() {
         var handler = queue.shift();
         if(!handler) {
@@ -53,6 +64,7 @@ function App() {
           }
           return;
         }
+        if ( res.finished ) return;
         if ( 'function' === typeof handler ) handler = { callback: handler };
         if ( 'function' !== typeof handler.callback ) return next();
         if ( Array.isArray(handler.methods) && (!probe) ) {
@@ -74,7 +86,6 @@ function App() {
         } else if (!res.finished) {
           var result = handler.callback( req, res, next );
           if ( result && result.then ) return result.then(next);
-          return next();
         }
       })();
     });
