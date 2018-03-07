@@ -37,9 +37,9 @@ function App() {
           handlerParams  = {},
           allowedMethods = [];
       if ( req.body.length ) {
-        req.body = Buffer.concat.apply(new Buffer(''),req.body);
+        req.body = Buffer.concat(req.body);
       } else {
-        req.body = new Buffer('');
+        req.body = new Buffer(0);
       }
       var bodyParams;
       try {
