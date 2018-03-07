@@ -4,7 +4,8 @@ var decodeQuery = require('./lib/decode-query'),
     io          = require('socket.io'),
     Route       = require('route-parser'),
     url         = require('url'),
-    toLowerCase = require('./lib/tolowercase');
+    toLowerCase = require('./lib/tolowercase'),
+    toUpperCase = require('./lib/touppercase');
 
 // Hint the global variables to scrutinizer
 /** global: Buffer */
@@ -55,7 +56,7 @@ function App() {
         var handler = queue.shift();
         if(!handler) {
           if ( probe ) {
-            allowedMethods = [].concat.apply([],allowedMethods.map(String.prototype.toUpperCase.call));
+            allowedMethods = [].concat.apply([],allowedMethods.map(toUpperCase));
             allowedMethods = allowedMethods.filter(function(item,pos) {
               return allowedMethods.indexOf(item) === pos;
             });
