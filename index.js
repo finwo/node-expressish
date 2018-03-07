@@ -2,8 +2,12 @@ var decodeQuery = require('./lib/decode-query'),
     EE          = require('simple-ee'),
     http        = require('http'),
     io          = require('socket.io'),
+    Route       = require('route-parser'),
     url         = require('url'),
     toLowerCase = require('./lib/tolowercase');
+
+// Hint the global variables to scrutinizer
+/** global: Buffer */
 
 // The basic constructor
 function App() {
