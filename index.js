@@ -86,6 +86,7 @@ function App() {
         req.params = Object.assign({},params,handlerParams);
         if ( probe ) {
           allowedMethods.push( Array.isArray(handler.methods) ? handler.methods : ['get','post','put','delete'] );
+          next();
         } else if (!res.finished) {
           var result = handler.callback( req, res, next );
           if ( result && result.then ) return result.then(next);
