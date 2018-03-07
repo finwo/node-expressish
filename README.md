@@ -1,5 +1,5 @@
-Simple EE
-=========
+expressish
+==========
 
 [![npm](https://img.shields.io/npm/v/expressish.svg?style=flat-square)](https://npmjs.com/package/expressish/)
 [![Scrutinizer Build](https://img.shields.io/scrutinizer/build/g/finwo/node-expressish.svg?style=flat-square)](https://scrutinizer-ci.com/g/finwo/node-expressish/)
@@ -7,7 +7,7 @@ Simple EE
 [![Scrutinizer Coverage](https://img.shields.io/scrutinizer/coverage/g/finwo/node-expressish.svg?style=flat-square)](https://scrutinizer-ci.com/g/finwo/node-expressish/)
 [![npm](https://img.shields.io/npm/l/expressish.svg?style=flat-square)](https://npmjs.com/package/expressish/)
 
-Simple event emitter
+Simple express-like app environment
 
 ## Contributing
 
