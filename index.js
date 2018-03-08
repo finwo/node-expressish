@@ -58,7 +58,7 @@ function App() {
             mw      = !!handler;
         handler = handler || rqueue.shift();
         if(!handler) {
-          if ( probe ) {
+          if ( probe && !res.finished ) {
             allowedMethods = [].concat.apply([],allowedMethods.map(toUpperCase));
             allowedMethods = allowedMethods.filter(function(item,pos) {
               return allowedMethods.indexOf(item) === pos;
