@@ -23,7 +23,8 @@ function App() {
 
   // The request handler
   this.on('request', function(req, res) {
-    var queue  = app.__middleware.slice().concat(app.__routes.slice()),
+    var mqueue = app.__middleware.slice(),
+        rqueue = app.__routes.slice(),
         probe  = req.method.toLowerCase() === 'options';
     Object.assign(req,url.parse(req.url));
     Object.keys(app.fixedHeader).forEach(function(key) {
@@ -53,13 +54,18 @@ function App() {
       }
       Object.assign(params,bodyParams);
       (function next() {
-        var handler = queue.shift();
+        var handler = mqueue.shift(),
+            mw      = !!handler;
+        handler = handler || rqueue.shift();
         if(!handler) {
           if ( probe ) {
             allowedMethods = [].concat.apply([],allowedMethods.map(toUpperCase));
             allowedMethods = allowedMethods.filter(function(item,pos) {
               return allowedMethods.indexOf(item) === pos;
             });
+            if(!allowedMethods.length) {
+              allowedMethods = ['GET','POST','PUT','DELETE'];
+            }
             res.setHeader('Access-Control-Allow-Headers', '*');
             res.setHeader('Access-Control-Allow-Origin' , '*');
             res.setHeader('Access-Control-Allow-Method' , allowedMethods);
@@ -84,7 +90,7 @@ function App() {
           }
         }
         req.params = Object.assign({},params,handlerParams);
-        if ( probe ) {
+        if ( probe && !mw ) {
           allowedMethods.push( Array.isArray(handler.methods) ? handler.methods : ['get','post','put','delete'] );
           next();
         } else if (!res.finished) {
