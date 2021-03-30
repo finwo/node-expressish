@@ -1,8 +1,6 @@
 expressish
 ==========
 
-[![Codetree](https://codetree.com/images/managed-with-codetree.svg)](https://codetree.com/projects/gX1r)
-
 [![npm](https://img.shields.io/npm/v/expressish.svg?style=flat-square)](https://npmjs.com/package/expressish/)
 [![npm](https://img.shields.io/npm/l/expressish.svg?style=flat-square)](https://npmjs.com/package/expressish/)
 
